@@ -26,6 +26,14 @@
         <label for="mail">Email:</label>
         <input type="email" id="mail" name="user-email">
         
+        <!-- /* Add an “Other” option to the Job Role section
+        This is the one and only section of the project where you will have to make changes directly in
+        the `index.html` file.
+            ● In the `index.html` file, just below the ‘Job Role’ `select` element, create a text input
+        element, set its `name` attribute to “job_role_other”, set its `placeholder` attribute to
+        “Your Job Role”, and give it an `id` attribute of “other-title” so you can easily target this
+         element in your JS file. */ -->
+
         <label for="title">Job Role</label>
         <select id="title" name="user-title">
           <option value="full-stack js developer">Full Stack JavaScript Developer</option>
@@ -34,7 +42,8 @@
           <option value="designer">Designer</option>          
           <option value="student">Student</option>
           <option value="other">Other</option>  
-        </select>           
+        </select>       
+        <input type="text" name="job_role_other" placeholder="Your Job Role" id="other-title">    
       </fieldset>
       
       <fieldset class="shirt">
