@@ -21,7 +21,7 @@ element in your JS file.
     ● In your JavaScript file, target the ‘Other’ input field, and hide it initially, so that it will
 display if JavaScript is disabled, but be hidden initially with JS. */
 
-$("#other-title").hide();
+$("#other-title").hide(); //hides the text input element for other job role in the html file
 
 /* T-SHIRT SECTION
 The goal for the t-shirt section is to filter the available "Color" options by the selected theme in
@@ -35,8 +35,13 @@ clear to the user that they need to select a theme before selecting a color. Use
         // $("#first-option").hide(); // hides elements with id of 'first-option' in this case just the design menu's first option
     $("#design option:first").hide(); // hides first option in the design drop down menu "select theme"
     /*
-    ● Update the “Color” field to read “Please select a T-shirt theme”.
-    ● Hide the colors in the “Color” drop down menu.
+    ● Update the “Color” field to read “Please select a T-shirt theme”. */
+    $("#color").prepend( "<option selected>Please select a T-shirt theme</option>" ); //adds new menu option to color and makes the option the default selection by adding "selected" inside the opening option tag
+    $("#color option:first").hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
+    /*
+    ● Hide the colors in the “Color” drop down menu.*/
+    $("#color").find("option").hide(); // uses find method to get all elements with color id then takes only the option elements with that color id and hides them (them being: all t shirt color drop down menu options)
+    /*
     ● NOTE: Be sure to check out the helpful links in the second section of this Study Guide if
 you’re unsure of how to accomplish these steps.
 Then, when one of the two themes is selected, only the appropriate colors should show in the
