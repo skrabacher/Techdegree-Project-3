@@ -40,7 +40,9 @@ clear to the user that they need to select a theme before selecting a color. Use
     $("#color option:first").hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
     /*
     ● Hide the colors in the “Color” drop down menu.*/
-    $("#color").find("option").hide(); // uses find method to get all elements with color id then takes only the option elements with that color id and hides them (them being: all t shirt color drop down menu options)
+    //FIRST TRY CODE is the first line below, second line below is more succinct and SPECIFIC. it uses the treehouse descendant selection method
+    // $("#color").find("option").hide(); // uses find method to get all elements with color id then takes only the option elements with that color id and hides them (them being: all t shirt color drop down menu options)
+    $("#color option").hide(); // selects any option elements that are descendants of elements with the color id and hides them (them being: all t shirt color drop down menu options) 
     /*
     ● NOTE: Be sure to check out the helpful links in the second section of this Study Guide if
 you’re unsure of how to accomplish these steps.
@@ -50,7 +52,16 @@ use a `change` event listener on the “Design” menu `select` element to liste
 inside the event listener, you’ll use a conditional to determine what to hide, show and update.
 ●   If “js puns” is selected, hide the three “heart js” option elements in the “Color” drop
 down menu, show the three “js puns” option elements, and update the “Color” field to
-the first available color.
+the first available color. */
+// START HERE ******************************************************************************
+$([value="js puns"]).on('click', function(){ ///***can't figure out how to select line 66 in index.html :( */
+// $(selector).show(); //DRAFT! need selectors
+// $(selector).hide(); //DRAFT! need selectors
+console.log("js puns selected"); //test
+});
+/*
 ●   If “heart js” is selected, hide the three “js puns” option elements in the “Color” drop
 down menu, show the three “heart js” option elements, and update the “Color” field to
 the first available color. */
+$(selector).show(); //DRAFT! need selectors
+$(selector).hide(); //DRAFT! need selectors
