@@ -23,6 +23,16 @@ display if JavaScript is disabled, but be hidden initially with JS. */
 
 $("#other-title").hide(); //hides the text input element for other job role in the html file
 
+$("#title").on("change", function() {  // change event listener - everytime #title value is changed
+    if($('#title').val() === "other") {   //if user selects other, other job role input box will show
+        $('#other-title').show();
+    } else {                              //if user selects anything else, input box will remain hidden
+        $('#other-title').hide();
+    }
+    console.log($('#title').val()); /// test to see which drop down item is selected
+});
+
+
 /* T-SHIRT SECTION
 The goal for the t-shirt section is to filter the available "Color" options by the selected theme in
 the "Design" field. Doing this ensures that the user cannot select an invalid combination of
@@ -37,6 +47,7 @@ clear to the user that they need to select a theme before selecting a color. Use
     /*
     ● Update the “Color” field to read “Please select a T-shirt theme”. */
     $("#color").prepend( "<option selected>Please select a T-shirt theme</option>" ); //adds new menu option to color and makes the option the default selection by adding "selected" inside the opening option tag
+    // $("#color option:selected").attr(value="none"); //***NEED TO FIX***TRYING TO ASSIGN VALUE TO THIS OPTION SO THAT IT CAN BE REMOVED LATER WHEN THEME IS SELECTED***
     $("#color option:first").hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
     /*
     ● Hide the colors in the “Color” drop down menu.*/
@@ -50,18 +61,34 @@ Then, when one of the two themes is selected, only the appropriate colors should
 “Color” drop down menu, and the “Color” field should update to the first available color. You’ll
 use a `change` event listener on the “Design” menu `select` element to listen for changes. And
 inside the event listener, you’ll use a conditional to determine what to hide, show and update.
+
 ●   If “js puns” is selected, hide the three “heart js” option elements in the “Color” drop
 down menu, show the three “js puns” option elements, and update the “Color” field to
 the first available color. */
-// START HERE ******************************************************************************
-$([value="js puns"]).on('click', function(){ ///***can't figure out how to select line 66 in index.html :( */
-// $(selector).show(); //DRAFT! need selectors
-// $(selector).hide(); //DRAFT! need selectors
-console.log("js puns selected"); //test
-});
+
+$("#design").on('change', function(){ 
+    console.log("in change event handler for t shirt design");
+    
+    if($('#design').val() === "js puns") { //if statement for when js puns is selected > only shows the t shirts with the js puns options
+        console.log("js puns selected");
+        $("#color option").show(); // shows all of the options for the color select menu
+        //$("#color [value='none']").remove(); //***NEED TO FIX***TRYING TO REMOVE PLEASE SELECT THEME OPTION BECAUSE THE THEME HAS BEEN SELECTED
+        $("#color [value='tomato']").hide(); // hides t shirt with the value listed inside brackets
+        $("#color [value='steelblue']").hide(); // hides t shirt with the value listed inside brackets
+        $("#color [value='dimgrey']").hide(); // hides t shirt with the value listed inside brackets
+    } 
+
 /*
 ●   If “heart js” is selected, hide the three “js puns” option elements in the “Color” drop
 down menu, show the three “heart js” option elements, and update the “Color” field to
-the first available color. */
-$(selector).show(); //DRAFT! need selectors
-$(selector).hide(); //DRAFT! need selectors
+the first available color. */ 
+    else if ($('#design').val() === "heart js") { //if statement for when heart js is selected > only shows the t shirts with the heart js options
+        console.log("heart js selected"); 
+        $("#color option").show(); // shows all of the options for the color select menu
+        $("#color option:first").hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
+        $("#color [value='cornflowerblue']").hide(); // hides t shirt with the value listed inside brackets
+        $("#color [value='darkslategrey']").hide(); // hides t shirt with the value listed inside brackets
+        $("#color [value='gold']").hide(); // hides t shirt with the value listed inside brackets
+    }
+});
+
