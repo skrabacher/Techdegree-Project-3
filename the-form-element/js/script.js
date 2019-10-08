@@ -66,13 +66,15 @@ inside the event listener, you’ll use a conditional to determine what to hide,
 down menu, show the three “js puns” option elements, and update the “Color” field to
 the first available color. */
 
-$("#design").on('change', function(){ 
+$("#design").change(function(event){ //change event handler uses selected theme to display only the corresponding color t shirts in the color drop down menu and hides the shirt colors that do not match the user theme selection
     console.log("in change event handler for t shirt design");
-    
+    console.log(event);
+    console.log(event.target);
     if($('#design').val() === "js puns") { //if statement for when js puns is selected > only shows the t shirts with the js puns options
         console.log("js puns selected");
         $("#color option").show(); // shows all of the options for the color select menu
-        //$("#color [value='none']").remove(); //***NEED TO FIX***TRYING TO REMOVE PLEASE SELECT THEME OPTION BECAUSE THE THEME HAS BEEN SELECTED
+        $("#color option:first").hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
+        $("#color [value='cornflowerblue']").prop("selected",true); //updates the color field to show the first available color (cornflower blue)
         $("#color [value='tomato']").hide(); // hides t shirt with the value listed inside brackets
         $("#color [value='steelblue']").hide(); // hides t shirt with the value listed inside brackets
         $("#color [value='dimgrey']").hide(); // hides t shirt with the value listed inside brackets
@@ -86,6 +88,7 @@ the first available color. */
         console.log("heart js selected"); 
         $("#color option").show(); // shows all of the options for the color select menu
         $("#color option:first").hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
+        $("#color [value='tomato']").prop("selected",true); //updates the color field to show the first available color (tomato)
         $("#color [value='cornflowerblue']").hide(); // hides t shirt with the value listed inside brackets
         $("#color [value='darkslategrey']").hide(); // hides t shirt with the value listed inside brackets
         $("#color [value='gold']").hide(); // hides t shirt with the value listed inside brackets
