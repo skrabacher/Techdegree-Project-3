@@ -65,7 +65,7 @@ inside the event listener, you’ll use a conditional to determine what to hide,
 down menu, show the three “js puns” option elements, and update the “Color” field to
 the first available color. */
 
-$("#design").change(function(event){ //change event handler uses selected theme to display only the corresponding color t shirts in the color drop down menu and hides the shirt colors that do not match the user theme selection
+$("#design").on('change', function(event){ //change event handler uses selected theme to display only the corresponding color t shirts in the color drop down menu and hides the shirt colors that do not match the user theme selection
     console.log("in change event handler for t shirt design");
     console.log(event);
     console.log(event.target);
@@ -116,10 +116,10 @@ the cost, day or time of the activities were changed in the HTML. To do that, we
     can view the elements tab in the Chrome DevTools to check that your element is in the DOM.
     Create a global variable to store total activity cost — initially set to 0 — don't use const since
     you want to update this as needed.*/
+
+let amountDueContainer= "<span><span>"; //dom element created to display total activity cost
+$(".activities").append(amountDueContainer); //appended element to the activities section
 let activityCost= 0; // global variable for total activity cost
-console.log("Total Cost: $", activityCost);
-let amountDue= $( "<h3>Amount Due: $</h3>" ).append(activityCost); //dom element created to display total activity cost
-$(".activities").append(amountDue); //appended element to the activities section
 
     /*Listening for changes in the activity section
     Add a change event listener to the activity section. Inside the listener, it will be helpful to have
@@ -127,39 +127,39 @@ $(".activities").append(amountDue); //appended element to the activities section
         ● NOTE: It is helpful at this point to log out the variable you just created to double check
     that its values is what you expect. Remember, you’ll need to click on the checkboxes in
     the Activity section to run the code in this listener, including your log statements.*/
-$("[type=checkbox]").change(function(event){ //change event handler for check boxes in activity section
+$("[type=checkbox]").on('change', function(event){ //change event handler for check boxes in activity section
     console.log("in activities change event handler");
+    
     let $clickedBox= (event.target); //variable for dom input element that was just clicked
-    console.log($clickedBox);
     
     /*Updating and displaying the total activity cost
-    Let’s add another helpful variable in the Activity section’s change listener:
-        ● Get the `data-cost` attribute value of the clicked element stored in the variable above.*/
-    $clickedBox= $($clickedBox).attr('data-cost'); // stores activity cost as the new value of the $clickedBox variable
-    console.log($clickedBox);
+        Let’s add another helpful variable in the Activity section’s change listener:
+            ● Get the `data-cost` attribute value of the clicked element stored in the variable above.*/
+    let $dataCost= $($clickedBox).attr('data-cost'); // stores activity cost as the new value of the $clickedBox variable
     
-/*    Since you’ll be performing some simple arithmetic with the activity cost, you’ll need to
-    make sure the value is a number. There are helpful methods for turning strings into
-    numbers, which can be found with a Google search. And the `typeof` operator can be
-    used to log out the data type of a value or variable.
-        ● NOTE: Again, it’s helpful here to log out the cost variable.*/
-    console.log(activityCost);    
-    $clickedBox= $clickedBox.slice(1, 4); //reads the string "$200" as an array and only returns "200" (indexes 1 through 4)
-    console.log($clickedBox);  
-    $clickedBox= parseFloat($clickedBox); //converts string to a number
-    console.log(typeof $clickedBox);
+            /*Since you’ll be performing some simple arithmetic with the activity cost, you’ll need to
+            make sure the value is a number. There are helpful methods for turning strings into
+            numbers, which can be found with a Google search. And the `typeof` operator can be
+            used to log out the data type of a value or variable.
+            ● NOTE: Again, it’s helpful here to log out the cost variable.*/
+    $dataCost= $dataCost.slice(1, 4); //reads the string "$200" as an array and only returns "200" (indexes 1 through 4)
+    $dataCost= parseFloat($dataCost); //converts string to a number
 
-    /*Still inside the Activity section’s change listener, you can use an `if/else` statement to check if
-    the clicked input element is checked or unchecked. If the input element is checked, add the cost
-    of the currently clicked activity to the total cost variable, else subtract the cost.
-    Finally, set the text of the total cost element (that you created above) equal to the string ‘Total:
-    $’ concatenated with the current value of the total cost variable (that you declared above).*/
-    if ($(this).prop('checked') === true) { // if statement that tests to see if the event target is has a property of 'checked'
-        console.log($clickedBox);
-        
-        
+        /*Still inside the Activity section’s change listener, you can use an `if/else` statement to check if
+        the clicked input element is checked or unchecked. If the input element is checked, add the cost
+        of the currently clicked activity to the total cost variable, else subtract the cost.
+        Finally, set the text of the total cost element (that you created above) equal to the string ‘Total:
+        $’ concatenated with the current value of the total cost variable (that you declared above).*/
+    if ($($clickedBox).prop('checked') === true) { // if statement that tests to see if the event target has a property of 'checked'
+        activityCost= activityCost + $dataCost; // adds cost of checked activity to total activity cost
+    }
+    else {
+        activityCost= activityCost - $dataCost; // subtracts cost of unchecked activity from total activity cost
     }
 
+    $('.activities span').text('Amount Due: $' + activityCost);// displays and updates total amount due as boxes are checked and unchecked
+    // amountDueContainer= $( "<h3>Amount Due: $</h3>" ).append(activityCost); 
+    // $(".activities").append(amountDue);
 });
 
     /*Disabling conflicting activities
