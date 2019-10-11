@@ -160,7 +160,7 @@ $("[type=checkbox]").on('change', function(event){ //change event handler for ch
     $('.activities span').text('Amount Due: $' + activityCost);// displays and updates total amount due as boxes are checked and unchecked
     // amountDueContainer= $( "<h3>Amount Due: $</h3>" ).append(activityCost); 
     // $(".activities").append(amountDue);
-});
+
 
     /*Disabling conflicting activities
     Still inside the Activity section’s change listener, let’s follow the same pattern we used to get
@@ -169,9 +169,36 @@ $("[type=checkbox]").on('change', function(event){ //change event handler for ch
         ● Get the `data-day-and-time` attribute value of the clicked element stored in a variable
     above. NOTE: Now would be a good time to log out these most recent variables to
     make sure they are what you think they are.
+        */
+    let $clickedDataDayAndTime = $($clickedBox).attr('data-day-and-time');//day and time attribute of clicked box
+    console.log($clickedDataDayAndTime);
+            /*
     Now you need to accomplish the following tasks:
         ● When an activity is checked, disable any activity that occurs at the same day and time
     (i.e. "conflicting activities") without disabling the activity that was just checked.
+        */       
+       for (i = 0; i < 7; i++) { //for loop to create indexes numbers to cycle through all checked boxes
+        let $currentCheckboxIt= $('input[type="checkbox"]').eq(i); //checkbox at current iteration of the loop.
+        let $iteratedName= $($currentCheckboxIt).attr('name');//name attribute at current interation of the loop (allows for side by side comparison in the if statement condition)
+        let $clickedName= $($clickedBox).attr('name');//name attribute of clicked box (allows for side by side comparison in the if statement condition)
+        console.log($iteratedName);
+        console.log($clickedName);
+        console.log($currentCheckboxIt);
+        console.log($clickedBox); //let $clickedBox= (event.target);
+        console.log("if 2 lines above are the same, then nothing should be hidden")
+        //if ($($currentCheckboxIt).prop('checked') === true) {
+        if (($($currentCheckboxIt).attr('data-day-and-time') === $clickedDataDayAndTime) && ($clickedName != $iteratedName) && ($($clickedBox).prop('checked') === true))  {
+            console.log('looping! :)');
+            //$($currentCheckboxIt).hide(); //hide any activities with data-day-and-time === to checked activity data day and time 
+            $($currentCheckboxIt).prop("disabled",true);
+            console.log($currentCheckboxIt);
+            //$("#color option").eq(1).prop("selected",true);
+        } else { 
+            $($currentCheckboxIt).prop("disabled",false);
+       }
+        }   
+        
+        /*
         ● And when an activity is unchecked, you want to enable any conflicting activities.
     To do this, you’ll need to loop over all the checkbox inputs in the Activity section. It will be
     helpful to create a variable that targets the activity input element at the current iteration of the
@@ -195,7 +222,7 @@ $("[type=checkbox]").on('change', function(event){ //change event handler for ch
     property to `true`
         ● If the clicked activity was unchecked, then set the matching activity element's `disabled`
     property to `false`.*/
-
+});
 /*PAYMEMT SECTION
 Initially, the credit card section should be selected and displayed in the form, and the other two
 payment options should be hidden. The user should be able to change payment options at any
