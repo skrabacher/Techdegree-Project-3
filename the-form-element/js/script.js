@@ -181,20 +181,12 @@ $("[type=checkbox]").on('change', function(event){ //change event handler for ch
         let $currentCheckboxIt= $('input[type="checkbox"]').eq(i); //checkbox at current iteration of the loop.
         let $iteratedName= $($currentCheckboxIt).attr('name');//name attribute at current interation of the loop (allows for side by side comparison in the if statement condition)
         let $clickedName= $($clickedBox).attr('name');//name attribute of clicked box (allows for side by side comparison in the if statement condition)
-        console.log($iteratedName);
-        console.log($clickedName);
-        console.log($currentCheckboxIt);
-        console.log($clickedBox); //let $clickedBox= (event.target);
-        console.log("if 2 lines above are the same, then nothing should be hidden")
-        //if ($($currentCheckboxIt).prop('checked') === true) {
+        
+        //if statement below tests 3 conditions. IF 1)scheduled day time are the same, 2)activity name are not the same, 3)the click box is checked
         if (($($currentCheckboxIt).attr('data-day-and-time') === $clickedDataDayAndTime) && ($clickedName != $iteratedName) && ($($clickedBox).prop('checked') === true))  {
-            console.log('looping! :)');
-            //$($currentCheckboxIt).hide(); //hide any activities with data-day-and-time === to checked activity data day and time 
-            $($currentCheckboxIt).prop("disabled",true);
-            console.log($currentCheckboxIt);
-            //$("#color option").eq(1).prop("selected",true);
+            $($currentCheckboxIt).prop("disabled",true); // disables the other activity scheduled at the same time
         } else { 
-            $($currentCheckboxIt).prop("disabled",false);
+            $($currentCheckboxIt).prop("disabled",false); // changes the activity to enabled
        }
         }   
         
@@ -223,18 +215,45 @@ $("[type=checkbox]").on('change', function(event){ //change event handler for ch
         ● If the clicked activity was unchecked, then set the matching activity element's `disabled`
     property to `false`.*/
 });
-/*PAYMEMT SECTION
+
+
+/*PAYMENT SECTION
 Initially, the credit card section should be selected and displayed in the form, and the other two
 payment options should be hidden. The user should be able to change payment options at any
 time, but shouldn’t be able to select the “Select Payment Method” option. So you’ll need to
 check the currently selected payment option, and hide and show the payment sections in the
 form accordingly.
     ● Hide the “Select Payment Method” `option` so it doesn’t show up in the drop down
-menu.
-    ● Get the value of the payment select element, and if it’s equal to ‘credit card’, set the
-credit card payment section in the form to show, and set the other two options to hide.
-    ● Repeat the above step with the PayPal and BitCoin options so that the selected
+menu.*/
+$('option[value="select method"]').hide();
+
+if ($('#payment').val() === 'select method') { //if statement hides all payment entry/info elements until a payment option is selected
+    $('div[id="credit-card"]').hide(); //hides cc input elements
+    $('div[id="paypal"]').hide();// hides paypal spiel
+    $('div[id="bitcoin"]').hide();//hides bitcoin spiel
+}
+
+$("#payment").on('change', function(event){ //change event handler uses selected theme to display only the corresponding color t shirts in the color drop down menu and hides the shirt colors that do not match the user theme selection
+    console.log($('#payment').val());
+    /*● Get the value of the payment select element, and if it’s equal to ‘credit card’, set the
+credit card payment section in the form to show, and set the other two options to hide.*/
+       if ($('#payment').val() === 'Credit Card') {
+        $('div[id="credit-card"]').show(); //shows cc input elements
+        $('div[id="paypal"]').hide();// hides paypal spiel
+        $('div[id="bitcoin"]').hide();//hides bitcoin spiel
+    } else 
+   /*● Repeat the above step with the PayPal and BitCoin options so that the selected
 payment is shown and the others are hidden.*/
+        if ($('#payment').val() === 'PayPal') {
+            $('div[id="credit-card"]').hide(); //hides cc input elements
+            $('div[id="paypal"]').show();// shows paypal spiel
+            $('div[id="bitcoin"]').hide();//hides bitcoin spiel
+        } else if ($('#payment').val() === 'Bitcoin') {
+            $('div[id="credit-card"]').hide(); //hides cc input elements
+            $('div[id="paypal"]').hide();// hides paypal spiel
+            $('div[id="bitcoin"]').show();//shows bitcoin spiel
+        }
+});
 
 /*FORM VALIDATION AND VALIDATION MESSAGES
 There are numerous ways to accomplish this part of the project. You could try to cram all the
