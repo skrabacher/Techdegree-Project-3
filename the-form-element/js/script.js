@@ -291,12 +291,8 @@ error indicator and return true.
             //return /.+/.test(name); // if field is blank test method will return false else will return true
         // '/^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i' <= regex designed to allow names with initials such as J.J. and requires a first and last name
         }
-        function isValidEmail(mail) {
-            console.log('in isValidEmail function');
-            return /^[^@]+@[^@.]+\.[a-z]+$/gim.test(mail);
-        }
-    
-        $(nameInput).keyup(function(event){ //.on ('change') on works when field is no longer focused on
+            
+        $(nameInput).keyup(function(event){ //event listener for any typing in name input field
             console.log ($(this).val());
             let userInput= isValidName($(this).val());
             console.log(userInput);
@@ -305,6 +301,22 @@ error indicator and return true.
                 ///hide warning message
             } else if (userInput === false) {
                 console.log ('Name is invalid!')
+                //show warning message
+            }
+        });
+        function isValidEmail(mail) {
+            console.log('in isValidEmail function');
+            return /^[^@]+@[^@.]+\.[a-z]+$/i.test(mail);
+        }
+        $(emailInput).keyup(function(event){ //event listener for any typing in email input field
+            console.log ($(this).val());
+            let userInput= isValidEmail($(this).val());
+            console.log(userInput);
+            if (userInput === true) {
+                console.log ('Email is valid!')
+                ///hide warning message
+            } else if (userInput === false) {
+                console.log ('Email is invalid!')
                 //show warning message
             }
         });
