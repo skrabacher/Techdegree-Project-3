@@ -285,36 +285,37 @@ error indicator and return true.
        const cvvInput = document.getElementById("cvv"); // selects the cvv input element
 
         //DRAFT BELOW
-        function isValidName(name) {
+       
+        function isValidName(name) { // tests to see if name field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
             console.log ('in isValidName function');
-            return /^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i.test(name);
-            //return /.+/.test(name); // if field is blank test method will return false else will return true
-        // '/^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i' <= regex designed to allow names with initials such as J.J. and requires a first and last name
+            return /^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i.test(name); //regex designed to allow names with initials such as J.J. and requires a first and last name
+            // return /.+/.test(name); // if field is blank test method will return false else will return true
+            // '/^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i' <= regex designed to allow names with initials such as J.J. and requires a first and last name
         }
             
         $(nameInput).keyup(function(event){ //event listener for any typing in name input field
-            console.log ($(this).val());
-            let userInput= isValidName($(this).val());
+            console.log ($(this).val()); //console logs the text the user typed
+            let userInput= isValidName($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
             console.log(userInput);
             if (userInput === true) {
                 console.log ('Name is valid!')
-                ///hide warning message
+                //hide warning message
             } else if (userInput === false) {
                 console.log ('Name is invalid!')
                 //show warning message
             }
         });
-        function isValidEmail(mail) {
+        function isValidEmail(mail) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
             console.log('in isValidEmail function');
             return /^[^@]+@[^@.]+\.[a-z]+$/i.test(mail);
         }
         $(emailInput).keyup(function(event){ //event listener for any typing in email input field
-            console.log ($(this).val());
-            let userInput= isValidEmail($(this).val());
+            console.log ($(this).val()); //console logs the text the user typed
+            let userInput= isValidEmail($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
             console.log(userInput);
             if (userInput === true) {
                 console.log ('Email is valid!')
-                ///hide warning message
+                //hide warning message
             } else if (userInput === false) {
                 console.log ('Email is invalid!')
                 //show warning message
