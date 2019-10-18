@@ -278,39 +278,58 @@ error indicator and return true.
         // global variables for all input elements requiring validation
        const nameInput = document.getElementById("name"); // selects the name input element
        const emailInput = document.getElementById("mail"); // selects the email input element
-       const activitiesInput = document.getElementByClass("activities"); // selects the activities input element ***DRAFT SELECTOR.. not sure it's right***
+       const activitiesInput = document.getElementsByClassName("activities"); // selects the activities input element ***DRAFT SELECTOR.. not sure it's right***
        
        const creditCardNumberInput = document.getElementById("cc-num"); // selects the credit card number input element
        const zipCodeInput = document.getElementById("zip"); // selects the zip code input elemtent
        const cvvInput = document.getElementById("cvv"); // selects the cvv input element
 
         //DRAFT BELOW
-       function isValidName(name) {
-           console.log ('in isValidName function');
-        return /.*/.test(name); // if field is blank test method will return false else will return true
+        function isValidName(name) {
+            console.log ('in isValidName function');
+            return /^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i.test(name);
+            //return /.+/.test(name); // if field is blank test method will return false else will return true
         // '/^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i' <= regex designed to allow names with initials such as J.J. and requires a first and last name
-      }
-      
-      function showOrHideTip(show, element) {
-        // show element when show is true, hide when false
-        if (show) {
-          element.style.display = "inherit";
-        } else {
-          element.style.display = "inherit";
         }
-      }
+        function isValidEmail(mail) {
+            console.log('in isValidEmail function');
+            return /^[^@]+@[^@.]+\.[a-z]+$/gim.test(mail);
+        }
+    
+        $(nameInput).keyup(function(event){ //.on ('change') on works when field is no longer focused on
+            console.log ($(this).val());
+            let userInput= isValidName($(this).val());
+            console.log(userInput);
+            if (userInput === true) {
+                console.log ('Name is valid!')
+                ///hide warning message
+            } else if (userInput === false) {
+                console.log ('Name is invalid!')
+                //show warning message
+            }
+        });
       
-      function createListener(validator) {
-        return e => {
-          const text = e.target.value;
-          const valid = validator(text);
-          const showTip = text !== "" && !valid;
-          const tooltip = e.target.nextElementSibling;
-          showOrHideTip(showTip, tooltip);
-        };
-      }
+    //   function showOrHideTip(show, element) {
+    //     // show element when show is true, hide when false
+    //     if (show) { // if text !== "" && !valid (as defined below in showTip const)
+    //       element.style.display = "inherit"; //shows tool tip to warn user input is no good
+    //     } else {
+    //       element.style.display = "inherit"; //keeps tool tip hidden
+    //     }
+    //   }
       
-      nameInput.addEventListener("input", createListener(isValidName)); //event listener for input on the name field, will run validation function anytime there is input in the name field
+    //   function createListener(validator) { //listener accepts regex validation function as a parameter (validator)
+    //     return e => {
+    //       const text = e.target.value; // defines text as event target
+    //       const valid = validator(text);
+    //       const showTip = text !== "" && !valid;
+    //       const tooltip = e.target.nextElementSibling;
+    //       showOrHideTip(showTip, tooltip);
+    //     };
+    //   }
+      
+    //   nameInput.addEventListener("input", createListener(isValidName)); //event listener for input on the name field, will run validation function anytime there is input in the name field
+    //   emailInput.addEventListener("input", createListener(isValidEmail));
       //DRAFT ABOVE  
       
       /*
