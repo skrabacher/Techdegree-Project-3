@@ -53,6 +53,22 @@ clear to the user that they need to select a theme before selecting a color. Use
     //FIRST TRY CODE is the first line below, second line below is more succinct and SPECIFIC. it uses the treehouse descendant selection method
     // $("#color").find("option").hide(); // uses find method to get all elements with color id then takes only the option elements with that color id and hides them (them being: all t shirt color drop down menu options)
     $("#color option").hide(); // selects any option elements that are descendants of elements with the color id and hides them (them being: all t shirt color drop down menu options) 
+//EXCEEDS ATTEMPT - Hide the "Color" label and select menu until a T-Shirt design is selected from the "Design" menu.
+    $('div[id="colors-js-puns"]').hide(); //Hides the "Color" label and select menu
+            
+    // <div id="colors-js-puns" class="">
+    //       <label for="color">Color:</label>
+    //       <select id="color">
+    //         <option value="cornflowerblue">Cornflower Blue (JS Puns shirt only)</option>
+    //         <option value="darkslategrey">Dark Slate Grey (JS Puns shirt only)</option> 
+    //         <option value="gold">Gold (JS Puns shirt only)</option> 
+    //         <option value="tomato">Tomato (I &#9829; JS shirt only)</option>
+    //         <option value="steelblue">Steel Blue (I &#9829; JS shirt only)</option> 
+    //         <option value="dimgrey">Dim Grey (I &#9829; JS shirt only)</option> 
+    //       </select>
+    //     </div>   
+    
+    
     /*
     ● NOTE: Be sure to check out the helpful links in the second section of this Study Guide if
 you’re unsure of how to accomplish these steps.
@@ -71,6 +87,7 @@ $("#design").on('change', function(event){ //change event handler uses selected 
     console.log(event.target);
     if($('#design').val() === "js puns") { //if statement for when js puns is selected > only shows the t shirts with the js puns options
         console.log("js puns selected");
+        $('div[id="colors-js-puns"]').show(); //Shows the "Color" label and select menu **EXCEEDS***
         $("#color option").show(); // shows all of the options for the color select menu
         $("#color option").eq(0).hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
         $("#color option").eq(1).prop("selected",true); //updates the color field to show the first available color (cornflower blue, 2nd in index so using numeral 1) using .eq to reference index assumes the index will never change, better to use value property to select
@@ -85,6 +102,7 @@ down menu, show the three “heart js” option elements, and update the “Colo
 the first available color. */ 
     else if ($('#design').val() === "heart js") { //if statement for when heart js is selected > only shows the t shirts with the heart js options
         console.log("heart js selected"); 
+        $('div[id="colors-js-puns"]').show(); //Shows the "Color" label and select menu **EXCEEDS***
         $("#color option").show(); // shows all of the options for the color select menu
         $("#color option:first").hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
         $("#color [value='tomato']").prop("selected",true); //updates the color field to show the first available color (tomato)
