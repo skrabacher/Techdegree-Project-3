@@ -297,12 +297,14 @@ error indicator and return true.
             console.log ($(this).val()); //console logs the text the user typed
             let userInput= isValidName($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
             console.log(userInput);
+            const $errorMessage = $('label[for="name"]').append("<h3>WRONG!</h3>").css('color', 'red');
             if (userInput === true) {
                 console.log ('Name is valid!')
-                //hide warning message
+                $errorMessage.hide();//hide warning message
             } else if (userInput === false) {
                 console.log ('Name is invalid!')
-                //show warning message
+                $errorMessage.show(); //show warning message
+
             }
         });
         function isValidEmail(mail) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
