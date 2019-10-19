@@ -203,7 +203,7 @@ $("[type=checkbox]").on('change', function(event){ //change event handler for ch
         //if statement below tests 3 conditions. IF 1)scheduled day time are the same, 2)activity name are not the same, 3)the click box is checked
         if (($($currentCheckboxIt).attr('data-day-and-time') === $clickedDataDayAndTime) && ($clickedName != $iteratedName) && ($($clickedBox).prop('checked') === true))  {
             $($currentCheckboxIt).prop("disabled",true); // disables the other activity scheduled at the same time
-        } else { 
+        } else if (($($currentCheckboxIt).attr('data-day-and-time') === $clickedDataDayAndTime) && ($clickedName != $iteratedName) && ($($clickedBox).prop('checked') === false)) { 
             $($currentCheckboxIt).prop("disabled",false); // changes the activity to enabled
        }
         }   
@@ -336,7 +336,7 @@ error indicator and return true.
         }
 
         // $nameErrorMessage creates h3 tag with error message. Appends it above the input field.
-        const $emailErrorMessage = "<h3 class='email'>*Bad email!</h3>"
+        const $emailErrorMessage = "<h3 class='email'>*Please enter a valid email address.</h3>"
         $('label[for="mail"]').append($emailErrorMessage);
         $('h3[class="email"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
         $('h3[class="email"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
@@ -353,7 +353,9 @@ error indicator and return true.
                 $('h3[class="email"]').show(); //show error message
             }
         });
-        //DRAFT BELOW
+
+
+            //DRAFT BELOW
     //   function showOrHideTip(show, element) {
     //     // show element when show is true, hide when false
     //     if (show) { // if text !== "" && !valid (as defined below in showTip const)
