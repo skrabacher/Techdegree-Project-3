@@ -356,37 +356,17 @@ error indicator and return true.
         });
 
     // ACTIVITIES INPUT VALIDATION & ERROR MESSAGE
-         
+        $("[type=submit]").on('click', function(event){ //click event handler for submit button
 
-           //draft pseudo code
-            //run for loop through check boxes
-            //if loop finds a checked box, stop the loop
-            // if loop does not find a checked box after 7 attempts, show error message 
+            if ($('input[type="checkbox"]:checked').length === 0) { //counts number of boxes that are checked and tests to see if they equal zero
+                console.log('show error message'); 
+                event.preventDefault(); //stop submit button from refreshing page
+            } else if ($('input[type="checkbox"]:checked').length > 0) {
+                console.log('submit ok');//show error message
+                event.preventDefault(); //stop submit button from refreshing page
+            }
+        });
 
-
-            //DRAFT BELOW
-    //   function showOrHideTip(show, element) {
-    //     // show element when show is true, hide when false
-    //     if (show) { // if text !== "" && !valid (as defined below in showTip const)
-    //       element.style.display = "inherit"; //shows tool tip to warn user input is no good
-    //     } else {
-    //       element.style.display = "inherit"; //keeps tool tip hidden
-    //     }
-    //   }
-      
-    //   function createListener(validator) { //listener accepts regex validation function as a parameter (validator)
-    //     return e => {
-    //       const text = e.target.value; // defines text as event target
-    //       const valid = validator(text);
-    //       const showTip = text !== "" && !valid;
-    //       const tooltip = e.target.nextElementSibling;
-    //       showOrHideTip(showTip, tooltip);
-    //     };
-    //   }
-      
-    //   nameInput.addEventListener("input", createListener(isValidName)); //event listener for input on the name field, will run validation function anytime there is input in the name field
-    //   emailInput.addEventListener("input", createListener(isValidEmail));
-      //DRAFT ABOVE  
       
       /*
         ○ Email (Email field must be a validly formatted e-mail address (you don't have to check that it's a real e-mail address, just that it's formatted like one: dave@teamtreehouse.com for example.)
