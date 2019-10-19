@@ -310,10 +310,10 @@ error indicator and return true.
             // '/^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i' <= regex designed to allow names with initials such as J.J. and requires a first and last name
         }
         // $nameErrorMessage creates h3 tag with error message. Appends it above the input field.
-        const $nameErrorMessage = "<h3>*Please enter your first and last name separated by a space.</h3>"
+        const $nameErrorMessage = "<h3 class='name'>*Please enter your first and last name separated by a space.</h3>"
         $('label[for="name"]').append($nameErrorMessage);
-        $('h3').css('color', 'red').css("fontSize", 14); //styles the appended error message to be red and smaller than the label
-        $('h3').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
+        $('h3[class="name"]').css('color', 'red').css("fontSize", 14).addClass('name'); //adds class & styles the appended error message to be red and smaller than the label
+        $('h3[class="name"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
             
         $(nameInput).keyup(function(event){ //event listener for any typing in name input field
             console.log ($(this).val()); //console logs the text the user typed
@@ -321,26 +321,36 @@ error indicator and return true.
             console.log(userInput);
             if (userInput === true) {
                 console.log ('Name is valid!')
-                $('h3').hide();//hide error message
+                $('h3[class="name"]').hide();//hide error message
             } else if (userInput === false) {
                 console.log ('Name is invalid!')
-                $('h3').show(); //show error message
+                $('h3[class="name"]').show(); //show error message
             }
         });
+
+
+
         function isValidEmail(mail) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
             console.log('in isValidEmail function');
             return /^[^@]+@[^@.]+\.[a-z]+$/i.test(mail);
         }
+
+        // $nameErrorMessage creates h3 tag with error message. Appends it above the input field.
+        const $emailErrorMessage = "<h3 class='email'>*Bad email!</h3>"
+        $('label[for="mail"]').append($emailErrorMessage);
+        $('h3[class="email"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
+        $('h3[class="email"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
+        
         $(emailInput).keyup(function(event){ //event listener for any typing in email input field
             console.log ($(this).val()); //console logs the text the user typed
             let userInput= isValidEmail($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
             console.log(userInput);
             if (userInput === true) {
                 console.log ('Email is valid!')
-                //hide warning message
+                $('h3[class="email"]').hide();//hide error message
             } else if (userInput === false) {
                 console.log ('Email is invalid!')
-                //show warning message
+                $('h3[class="email"]').show(); //show error message
             }
         });
         //DRAFT BELOW
