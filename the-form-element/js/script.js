@@ -284,7 +284,6 @@ error indicator and return true.
        const zipCodeInput = document.getElementById("zip"); // selects the zip code input elemtent
        const cvvInput = document.getElementById("cvv"); // selects the cvv input element
 
-        //DRAFT BELOW
        
         function isValidName(name) { // tests to see if name field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
             console.log ('in isValidName function');
@@ -292,19 +291,21 @@ error indicator and return true.
             // return /.+/.test(name); // if field is blank test method will return false else will return true
             // '/^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i' <= regex designed to allow names with initials such as J.J. and requires a first and last name
         }
+        // $nameErrorMessage creates h3 tag with error message. Appends it above the input field.
+        const $nameErrorMessage = $('label[for="name"]').append("<h3>*Please enter your first and last name separated by a space.</h3>");
+        $('h3').css('color', 'red').css("fontSize", 14); //styles the appended error message to be red and smaller than the label
+        $nameErrorMessage.hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
             
         $(nameInput).keyup(function(event){ //event listener for any typing in name input field
             console.log ($(this).val()); //console logs the text the user typed
             let userInput= isValidName($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
             console.log(userInput);
-            const $errorMessage = $('label[for="name"]').append("<h3>WRONG!</h3>").css('color', 'red');
             if (userInput === true) {
                 console.log ('Name is valid!')
-                $errorMessage.hide();//hide warning message
+                $($nameErrorMessage).hide();//hide error message
             } else if (userInput === false) {
                 console.log ('Name is invalid!')
-                $errorMessage.show(); //show warning message
-
+                $($nameErrorMessage).show(); //show error message
             }
         });
         function isValidEmail(mail) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
@@ -323,7 +324,7 @@ error indicator and return true.
                 //show warning message
             }
         });
-      
+        //DRAFT BELOW
     //   function showOrHideTip(show, element) {
     //     // show element when show is true, hide when false
     //     if (show) { // if text !== "" && !valid (as defined below in showTip const)
