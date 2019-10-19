@@ -292,7 +292,8 @@ error indicator and return true.
     ● Create a separate validation function for each of the required form fields or sections
         ○ Name (Name field can't be blank.)
         */
-       
+     
+    //NAME INPUT VALIDATION & ERROR MESSAGE
         // global variables for all input elements requiring validation
        const nameInput = document.getElementById("name"); // selects the name input element
        const emailInput = document.getElementById("mail"); // selects the email input element
@@ -329,7 +330,7 @@ error indicator and return true.
         });
 
 
-
+    //EMAIL INPUT VALIDATION & ERROR MESSAGE
         function isValidEmail(mail) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
             console.log('in isValidEmail function');
             return /^[^@]+@[^@.]+\.[a-z]+$/i.test(mail);
@@ -353,6 +354,14 @@ error indicator and return true.
                 $('h3[class="email"]').show(); //show error message
             }
         });
+
+    // ACTIVITIES INPUT VALIDATION & ERROR MESSAGE
+         
+
+           //draft pseudo code
+            //run for loop through check boxes
+            //if loop finds a checked box, stop the loop
+            // if loop does not find a checked box after 7 attempts, show error message 
 
 
             //DRAFT BELOW
