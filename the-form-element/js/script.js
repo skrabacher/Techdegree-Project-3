@@ -336,7 +336,7 @@ error indicator and return true.
             return /^[^@]+@[^@.]+\.[a-z]+$/i.test(mail);
         }
 
-        // $nameErrorMessage creates h3 tag with error message. Appends it above the input field.
+        // $emailErrorMessage creates h3 tag with error message. Appends it above the input field.
         const $emailErrorMessage = "<h3 class='email'>*Please enter a valid email address.</h3>"
         $('label[for="mail"]').append($emailErrorMessage);
         $('h3[class="email"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
@@ -363,7 +363,7 @@ $('fieldset[class="activities"]').append($activitiesErrorMessage);
 $('h3[class="activities"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
 $('h3[class="activities"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
     
-
+//***BUG***////***NEED TO CHANGE TO A CHECK BOX CLICK EVENT LISTENER - should make error disappear once box checked */
         $("[type=submit]").on('click', function(event){ //click event handler for submit button
             
             if ($('input[type="checkbox"]:checked').length === 0) { //counts number of boxes that are checked and tests to see if they equal zero
@@ -377,13 +377,14 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             }
         });
 
-       //PAYMENT INPUT VALIDATION & ERROR MESSAGE
+    //PAYMENT INPUT VALIDATION & ERROR MESSAGE
+       //CARDNUMBER
        function isValidCCNumber(creditCardNumber) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
-        console.log('in sValidCCNumber function');
+        console.log('in is ValidCCNumber function');
         return /^[0-9]{4}\s?\-?,?[0-9]{4}\s?\-?,?[0-9]{4}\s?\-?,?[0-9]{1,4}/.test(creditCardNumber); //regex requires 13-16 digits which can be optionally separated by commas, hyphens, or spaces after every 4th digit.
         }
 
-        // $nameErrorMessage creates h3 tag with error message. Appends the message to the label field.
+        // $ccNumberErrorMessage creates h3 tag with error message. Appends the message to the label field.
         const $ccNumberErrorMessage = "<h3 class='cc-num'>*Please enter a valid credit card number.</h3>"
         $('label[for="cc-num"]').append($ccNumberErrorMessage);
         $('h3[class="cc-num"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
@@ -402,7 +403,55 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             }
         }); 
 
-      
+        //ZIPCODE
+        function isValidZip(zipCode) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
+            console.log('in isValidZip function');
+            return /^[0-9]{5}$/.test(zipCode); //regex requires 5 digits
+            }
+    
+            // $zipErrorMessage creates h3 tag with error message. Appends the message to the label field.
+            const $zipErrorMessage = "<h3 class='zip'>*Zip code must be 5 digits.</h3>"
+            $('label[for="zip"]').append($zipErrorMessage);
+            $('h3[class="zip"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
+            $('h3[class="zip"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
+            
+            $(zipCodeInput).keyup(function(event){ //event listener for any typing in cc-num input field
+                console.log ($(this).val()); //console logs the text the user typed
+                let userInput= isValidZip($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
+                console.log(userInput);
+                if (userInput === true) {
+                    console.log ('Zip is valid!')
+                    $('h3[class="zip"]').hide();//hide error message
+                } else if (userInput === false) {
+                    console.log ('Zip is invalid!')
+                    $('h3[class="zip"]').show(); //show error message
+                }
+            }); 
+
+        //CVV    
+        function isValidCVV(cvv) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
+            console.log('in isValidCVV function');
+            return /^[0-9]{3}$/.test(cvv); //regex requires 5 digits
+            }
+    
+            // $cvvErrorMessage creates h3 tag with error message. Appends the message to the label field.
+            const $cvvErrorMessage = "<h3 class='cvv'>*CVV must be 3 digits.</h3>"
+            $('label[for="cvv"]').append($cvvErrorMessage);
+            $('h3[class="cvv"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
+            $('h3[class="cvv"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
+            
+            $(cvvInput).keyup(function(event){ //event listener for any typing in cc-num input field
+                console.log ($(this).val()); //console logs the text the user typed
+                let userInput= isValidCVV($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
+                console.log(userInput);
+                if (userInput === true) {
+                    console.log ('CVV is valid!')
+                    $('h3[class="cvv"]').hide();//hide error message
+                } else if (userInput === false) {
+                    console.log ('CVV is invalid!')
+                    $('h3[class="cvv"]').show(); //show error message
+                }
+            }); 
       /*
         ○ Email (Email field must be a validly formatted e-mail address (you don't have to check that it's a real e-mail address, just that it's formatted like one: dave@teamtreehouse.com for example.)
 
