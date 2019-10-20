@@ -355,17 +355,52 @@ error indicator and return true.
             }
         });
 
-    // ACTIVITIES INPUT VALIDATION & ERROR MESSAGE
-        $("[type=submit]").on('click', function(event){ //click event handler for submit button
+    // ACTIVITIES INPUT VALIDATION & ERROR 
+    
+// $activitiesErrorMessage creates h3 tag with error message. Appends it to the fieldset
+const $activitiesErrorMessage = "<h3 class='activities'>*Please select one or more activities.</h3>"
+$('fieldset[class="activities"]').append($activitiesErrorMessage);
+$('h3[class="activities"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
+$('h3[class="activities"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
+    
 
+        $("[type=submit]").on('click', function(event){ //click event handler for submit button
+            
             if ($('input[type="checkbox"]:checked').length === 0) { //counts number of boxes that are checked and tests to see if they equal zero
-                console.log('show error message'); 
+                console.log('show error message');  
                 event.preventDefault(); //stop submit button from refreshing page
+                $('h3[class="activities"]').show(); //show error message
             } else if ($('input[type="checkbox"]:checked').length > 0) {
                 console.log('submit ok');//show error message
+                $('h3[class="activities"]').hide(); //hide error message
                 event.preventDefault(); //stop submit button from refreshing page
             }
         });
+
+       //PAYMENT INPUT VALIDATION & ERROR MESSAGE
+       function isValidCCNumber(creditCardNumber) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
+        console.log('in sValidCCNumber function');
+        return /^[0-9]{4}\s?\-?,?[0-9]{4}\s?\-?,?[0-9]{4}\s?\-?,?[0-9]{1,4}/.test(creditCardNumber); //regex requires 13-16 digits which can be optionally separated by commas, hyphens, or spaces after every 4th digit.
+        }
+
+        // $nameErrorMessage creates h3 tag with error message. Appends the message to the label field.
+        const $ccNumberErrorMessage = "<h3 class='cc-num'>*Please enter a valid credit card number.</h3>"
+        $('label[for="cc-num"]').append($ccNumberErrorMessage);
+        $('h3[class="cc-num"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
+        $('h3[class="cc-num"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
+        
+        $(creditCardNumberInput).keyup(function(event){ //event listener for any typing in cc-num input field
+            console.log ($(this).val()); //console logs the text the user typed
+            let userInput= isValidCCNumber($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
+            console.log(userInput);
+            if (userInput === true) {
+                console.log ('CC Number is valid!')
+                $('h3[class="cc-num"]').hide();//hide error message
+            } else if (userInput === false) {
+                console.log ('CC Number is invalid!')
+                $('h3[class="cc-num"]').show(); //show error message
+            }
+        }); 
 
       
       /*
