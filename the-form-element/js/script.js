@@ -363,9 +363,7 @@ $('fieldset[class="activities"]').append($activitiesErrorMessage);
 $('h3[class="activities"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
 $('h3[class="activities"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
     
-//***BUG***////***NEED TO CHANGE TO A CHECK BOX CLICK EVENT LISTENER - should make error disappear once box checked */
-        $("[type=submit]").on('click', function(event){ //click event handler for submit button
-            
+        $('input[type="checkbox"]').on('change', function(event){ //change event handler runs everytime an activity box is checked or unchecked
             if ($('input[type="checkbox"]:checked').length === 0) { //counts number of boxes that are checked and tests to see if they equal zero
                 console.log('show error message');  
                 event.preventDefault(); //stop submit button from refreshing page
@@ -376,6 +374,7 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
                 event.preventDefault(); //stop submit button from refreshing page
             }
         });
+
 
     //PAYMENT INPUT VALIDATION & ERROR MESSAGE
        //CARDNUMBER
@@ -452,6 +451,27 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
                     $('h3[class="cvv"]').show(); //show error message
                 }
             }); 
+       
+    //MASTER VALIDATION FUNCTION
+        //$("[type=submit]").on('click', function(event){ //click event handler for submit button
+
+                                // if
+                                // function isValidName(name)
+                                // function isValidEmail(mail) 
+                                // both return true
+                                // test if payment selected is bitcoin or paypal and if true
+                                // ALLOW Submit
+
+                                // then test
+                                // if cc is selected as payment test to see if these are true
+                                // function isValidCCNumber(creditCardNumber)
+                                // function isValidZip(zipCode)
+                                // function isValidCVV(cvv) 
+
+
+                                // all return true
+                                // then allow user to Submit 
+                                // else prevent default
       /*
         ○ Email (Email field must be a validly formatted e-mail address (you don't have to check that it's a real e-mail address, just that it's formatted like one: dave@teamtreehouse.com for example.)
 
