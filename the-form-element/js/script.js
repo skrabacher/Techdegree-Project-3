@@ -1,7 +1,7 @@
 // ----------------------------------
 // Sarah Krabacher
 // FSJS TechDegree - Team Treehouse
-// Project 3 - Meets Expectations
+// Project 3 - Exceeds Expectations
 // ----------------------------------
 
 /*PUT THE FIRST FIELD IN THE 'FOCUS' STATE
@@ -351,17 +351,28 @@ error indicator and return true.
         $('label[for="mail"]').append($emailErrorMessage);
         $('h3[class="email"]').css('color', 'red').css("fontSize", 14); //adds class & styles the appended error message to be red and smaller than the label
         $('h3[class="email"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
-        
+        const $blankEmailErrorMessage = "<h3 class='email-blank'>*Email field is blank.</h3>"
+        $('label[for="mail"]').append($blankEmailErrorMessage);
+        $('h3[class="email-blank"]').css('color', 'red').css("fontSize", 14);
+        $('h3[class="email-blank"]').hide(); 
+
         $(emailInput).keyup(function(event){ //event listener for any typing in email input field
             console.log ($(this).val()); //console logs the text the user typed
             emailBoolean= isValidEmail($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
             console.log(emailBoolean);
-            if (emailBoolean === true) {
+            //emailBlankBoolean= 
+            if (/^\s*$/.test($(this).val()) === true) {
+                console.log("nothing entered into email field")
+                $('h3[class="email-blank"]').show();//hide error message
+                $('h3[class="email"]').hide();//hide error message
+            } else if (emailBoolean === true) {
                 console.log ('Email is valid!')
+                $('h3[class="email-blank"]').hide(); 
                 $('h3[class="email"]').hide();//hide error message
             } else if (emailBoolean === false) {
                 console.log ('Email is invalid!')
                 $('h3[class="email"]').show(); //show error message
+                $('h3[class="email-blank"]').hide();                 
             }
         });
 
@@ -464,6 +475,7 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
        
     //MASTER VALIDATION FUNCTION
         $("[type=submit]").on('click', function(event){ //click event handler for submit button
+            event.preventDefault(); //stop submit button from refreshing page
             console.log("in Master Validation Function");
             console.log('Name: ' + nameBoolean);
             console.log('Email: ' + emailBoolean);
