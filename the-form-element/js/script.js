@@ -470,8 +470,15 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             console.log('CC#: ' + ccNumBoolean);
             console.log('Zip: ' + zipBoolean);
             console.log('CVV: ' + cvvBoolean);
-            if (nameBoolean === true && emailBoolean === true) {
-                console.log('both name and email true!');
+            if (nameBoolean === true && emailBoolean === true && paymentSelected === 'Bitcoin') {
+                console.log('both name and email true and payment selected is bitcoin!');
+                console.log('ALLOW USER SUBMIT');
+            } else if (nameBoolean === true && emailBoolean === true && paymentSelected === 'PayPal') {
+                console.log('both name and email true and payment selected is paypal!');
+                console.log('ALLOW USER SUBMIT');
+            } else if (nameBoolean === true && emailBoolean === true && paymentSelected === 'Credit Card' && ccNumBoolean === true && zipBoolean === true && cvvBoolean === true) {
+                console.log('name, email, cc selected as payment, and all cc input valid');
+                console.log('ALLOW USER SUBMIT');
             }
         });
 
