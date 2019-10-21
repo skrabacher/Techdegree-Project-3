@@ -465,7 +465,6 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
     //MASTER VALIDATION FUNCTION
         $("[type=submit]").on('click', function(event){ //click event handler for submit button
             console.log("in Master Validation Function");
-            event.preventDefault(); //stop submit button from refreshing page
             console.log('Name: ' + nameBoolean);
             console.log('Email: ' + emailBoolean);
             console.log('Payment Method: ' + paymentSelected);
