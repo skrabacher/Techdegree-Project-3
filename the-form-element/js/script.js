@@ -243,8 +243,10 @@ check the currently selected payment option, and hide and show the payment secti
 form accordingly.
     ● Hide the “Select Payment Method” `option` so it doesn’t show up in the drop down
 menu.*/
-$('option[value="select method"]').hide();
 
+let paymentSelected = 'select method' // global variable to hold user selected payment method
+
+$('option[value="select method"]').hide();
 if ($('#payment').val() === 'select method') { //if statement hides all payment entry/info elements until a payment option is selected
     $('div[id="credit-card"]').hide(); //hides cc input elements
     $('div[id="paypal"]').hide();// hides paypal spiel
@@ -253,20 +255,21 @@ if ($('#payment').val() === 'select method') { //if statement hides all payment 
 
 $("#payment").on('change', function(event){ //change event handler uses selected theme to display only the corresponding color t shirts in the color drop down menu and hides the shirt colors that do not match the user theme selection
     console.log($('#payment').val());
+    paymentSelected = $('#payment').val()
     /*● Get the value of the payment select element, and if it’s equal to ‘credit card’, set the
 credit card payment section in the form to show, and set the other two options to hide.*/
-       if ($('#payment').val() === 'Credit Card') {
+       if (paymentSelected === 'Credit Card') {
         $('div[id="credit-card"]').show(); //shows cc input elements
         $('div[id="paypal"]').hide();// hides paypal spiel
         $('div[id="bitcoin"]').hide();//hides bitcoin spiel
     } else 
    /*● Repeat the above step with the PayPal and BitCoin options so that the selected
 payment is shown and the others are hidden.*/
-        if ($('#payment').val() === 'PayPal') {
+        if (paymentSelected === 'PayPal') {
             $('div[id="credit-card"]').hide(); //hides cc input elements
             $('div[id="paypal"]').show();// shows paypal spiel
             $('div[id="bitcoin"]').hide();//hides bitcoin spiel
-        } else if ($('#payment').val() === 'Bitcoin') {
+        } else if (paymentSelected === 'Bitcoin') {
             $('div[id="credit-card"]').hide(); //hides cc input elements
             $('div[id="paypal"]').hide();// hides paypal spiel
             $('div[id="bitcoin"]').show();//shows bitcoin spiel
@@ -463,6 +466,7 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             event.preventDefault(); //stop submit button from refreshing page
             console.log('Name: ' + nameBoolean);
             console.log('Email: ' + emailBoolean);
+            console.log('Payment Method: ' + paymentSelected);
             console.log('CC#: ' + ccNumBoolean);
             console.log('Zip: ' + zipBoolean);
             console.log('CVV: ' + cvvBoolean);
