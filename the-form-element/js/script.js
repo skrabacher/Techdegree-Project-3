@@ -366,6 +366,7 @@ error indicator and return true.
         });
 
     // ACTIVITIES INPUT VALIDATION & ERROR 
+let numberOfActivities = 0
     
 // $activitiesErrorMessage creates h3 tag with error message. Appends it to the fieldset
 const $activitiesErrorMessage = "<h3 class='activities'>*Please select one or more activities.</h3>"
@@ -374,10 +375,11 @@ $('h3[class="activities"]').css('color', 'red').css("fontSize", 14); //adds clas
 $('h3[class="activities"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
     
         $('input[type="checkbox"]').on('change', function(event){ //change event handler runs everytime an activity box is checked or unchecked
-            if ($('input[type="checkbox"]:checked').length === 0) { //counts number of boxes that are checked and tests to see if they equal zero
+            numberOfActivities = $('input[type="checkbox"]:checked').length
+            if (numberOfActivities === 0) { //counts number of boxes that are checked and tests to see if they equal zero
                 console.log('show error message');  
                 $('h3[class="activities"]').show(); //show error message
-            } else if ($('input[type="checkbox"]:checked').length > 0) {
+            } else if (numberOfActivities > 0) {
                 console.log('submit ok');//show error message
                 $('h3[class="activities"]').hide(); //hide error message
             }
@@ -467,18 +469,21 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             console.log('Name: ' + nameBoolean);
             console.log('Email: ' + emailBoolean);
             console.log('Payment Method: ' + paymentSelected);
+            console.log('Activities#: ' + numberOfActivities);
             console.log('CC#: ' + ccNumBoolean);
             console.log('Zip: ' + zipBoolean);
             console.log('CVV: ' + cvvBoolean);
-            if (nameBoolean === true && emailBoolean === true && paymentSelected === 'Bitcoin') {
+            if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'Bitcoin') {
                 console.log('both name and email true and payment selected is bitcoin!');
                 console.log('ALLOW USER SUBMIT');
-            } else if (nameBoolean === true && emailBoolean === true && paymentSelected === 'PayPal') {
+            } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'PayPal') {
                 console.log('both name and email true and payment selected is paypal!');
                 console.log('ALLOW USER SUBMIT');
-            } else if (nameBoolean === true && emailBoolean === true && paymentSelected === 'Credit Card' && ccNumBoolean === true && zipBoolean === true && cvvBoolean === true) {
+            } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'Credit Card' && ccNumBoolean === true && zipBoolean === true && cvvBoolean === true) {
                 console.log('name, email, cc selected as payment, and all cc input valid');
                 console.log('ALLOW USER SUBMIT');
+            } else {
+            event.preventDefault(); //stop submit button from refreshing page
             }
         });
 
