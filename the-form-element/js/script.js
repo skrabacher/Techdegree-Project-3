@@ -1,7 +1,7 @@
 // ----------------------------------
 // Sarah Krabacher
 // FSJS TechDegree - Team Treehouse
-// Project 3
+// Project 3 - Meets Expectations
 // ----------------------------------
 
 /*PUT THE FIRST FIELD IN THE 'FOCUS' STATE
