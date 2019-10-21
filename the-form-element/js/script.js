@@ -303,6 +303,13 @@ error indicator and return true.
        const zipCodeInput = document.getElementById("zip"); // selects the zip code input elemtent
        const cvvInput = document.getElementById("cvv"); // selects the cvv input element
 
+       let nameBoolean = false
+       let emailBoolean = false
+    //    let activiesValue = 
+       let ccNumBoolean = false
+       let zipBoolean = false
+       let cvvBoolean = false
+
        
         function isValidName(name) { // tests to see if name field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
             console.log ('in isValidName function');
@@ -318,12 +325,12 @@ error indicator and return true.
             
         $(nameInput).keyup(function(event){ //event listener for any typing in name input field
             console.log ($(this).val()); //console logs the text the user typed
-            let userInput= isValidName($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-            console.log(userInput);
-            if (userInput === true) {
+            nameBoolean= isValidName($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
+            console.log(nameBoolean);
+            if (nameBoolean === true) {
                 console.log ('Name is valid!')
                 $('h3[class="name"]').hide();//hide error message
-            } else if (userInput === false) {
+            } else if (nameBoolean === false) {
                 console.log ('Name is invalid!')
                 $('h3[class="name"]').show(); //show error message
             }
@@ -344,12 +351,12 @@ error indicator and return true.
         
         $(emailInput).keyup(function(event){ //event listener for any typing in email input field
             console.log ($(this).val()); //console logs the text the user typed
-            let userInput= isValidEmail($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-            console.log(userInput);
-            if (userInput === true) {
+            emailBoolean= isValidEmail($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
+            console.log(emailBoolean);
+            if (emailBoolean === true) {
                 console.log ('Email is valid!')
                 $('h3[class="email"]').hide();//hide error message
-            } else if (userInput === false) {
+            } else if (emailBoolean === false) {
                 console.log ('Email is invalid!')
                 $('h3[class="email"]').show(); //show error message
             }
@@ -366,12 +373,10 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
         $('input[type="checkbox"]').on('change', function(event){ //change event handler runs everytime an activity box is checked or unchecked
             if ($('input[type="checkbox"]:checked').length === 0) { //counts number of boxes that are checked and tests to see if they equal zero
                 console.log('show error message');  
-                event.preventDefault(); //stop submit button from refreshing page
                 $('h3[class="activities"]').show(); //show error message
             } else if ($('input[type="checkbox"]:checked').length > 0) {
                 console.log('submit ok');//show error message
                 $('h3[class="activities"]').hide(); //hide error message
-                event.preventDefault(); //stop submit button from refreshing page
             }
         });
 
@@ -391,12 +396,12 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
         
         $(creditCardNumberInput).keyup(function(event){ //event listener for any typing in cc-num input field
             console.log ($(this).val()); //console logs the text the user typed
-            let userInput= isValidCCNumber($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-            console.log(userInput);
-            if (userInput === true) {
+            ccNumBoolean = isValidCCNumber($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
+            console.log(ccNumBoolean);
+            if (ccNumBoolean === true) {
                 console.log ('CC Number is valid!')
                 $('h3[class="cc-num"]').hide();//hide error message
-            } else if (userInput === false) {
+            } else if (ccNumBoolean === false) {
                 console.log ('CC Number is invalid!')
                 $('h3[class="cc-num"]').show(); //show error message
             }
@@ -416,12 +421,12 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             
             $(zipCodeInput).keyup(function(event){ //event listener for any typing in cc-num input field
                 console.log ($(this).val()); //console logs the text the user typed
-                let userInput= isValidZip($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-                console.log(userInput);
-                if (userInput === true) {
+                zipBoolean = isValidZip($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
+                console.log(zipBoolean);
+                if (zipBoolean === true) {
                     console.log ('Zip is valid!')
                     $('h3[class="zip"]').hide();//hide error message
-                } else if (userInput === false) {
+                } else if (zipBoolean === false) {
                     console.log ('Zip is invalid!')
                     $('h3[class="zip"]').show(); //show error message
                 }
@@ -441,19 +446,31 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             
             $(cvvInput).keyup(function(event){ //event listener for any typing in cc-num input field
                 console.log ($(this).val()); //console logs the text the user typed
-                let userInput= isValidCVV($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-                console.log(userInput);
-                if (userInput === true) {
+                cvvBoolean= isValidCVV($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
+                console.log(cvvBoolean);
+                if (cvvBoolean === true) {
                     console.log ('CVV is valid!')
                     $('h3[class="cvv"]').hide();//hide error message
-                } else if (userInput === false) {
+                } else if (cvvBoolean === false) {
                     console.log ('CVV is invalid!')
                     $('h3[class="cvv"]').show(); //show error message
                 }
             }); 
        
     //MASTER VALIDATION FUNCTION
-        //$("[type=submit]").on('click', function(event){ //click event handler for submit button
+        $("[type=submit]").on('click', function(event){ //click event handler for submit button
+            console.log("in Master Validation Function");
+            event.preventDefault(); //stop submit button from refreshing page
+            console.log('Name: ' + nameBoolean);
+            console.log('Email: ' + emailBoolean);
+            console.log('CC#: ' + ccNumBoolean);
+            console.log('Zip: ' + zipBoolean);
+            console.log('CVV: ' + cvvBoolean);
+            if (nameBoolean === true && emailBoolean === true) {
+                console.log('both name and email true!');
+            }
+        });
+
 
                                 // if
                                 // function isValidName(name)
