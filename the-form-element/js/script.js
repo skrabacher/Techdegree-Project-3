@@ -362,6 +362,14 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
        
     //MASTER VALIDATION FUNCTION - tests to ensure ALL validations above return true (or for activities > 0) then allows user to submit for, OR displays error messages for fields that are invalid
         $("[type=submit]").on('click', function(event){ //click event handler for submit button
+            console.log("in Master Validation Function");
+            console.log('Name: ' + nameBoolean);
+            console.log('Email: ' + emailBoolean);
+            console.log('Payment Method: ' + paymentSelected);
+            console.log('Activities#: ' + numberOfActivities);
+            console.log('CC#: ' + ccNumBoolean);
+            console.log('Zip: ' + zipBoolean);
+            console.log('CVV: ' + cvvBoolean);
             if (nameBoolean === false) {
                 $('h3[class="name"]').show(); // shows name error message above name field
                 event.preventDefault(); //stop submit button from refreshing page
@@ -382,12 +390,12 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
                     $('h3[class="cvv"]').show(); //show error message
                     event.preventDefault(); //stop submit button from refreshing page
                 } else {
-                    console.log('ALLOW USER SUBMIT');
+                    //console.log('ALLOW USER SUBMIT');
                 }
             } if (paymentSelected === "Bitcoin") {
-                console.log('ALLOW USER SUBMIT');
+                //console.log('ALLOW USER SUBMIT');
             } if (paymentSelected === "PayPal") {
-                console.log('ALLOW USER SUBMIT');
+                //console.log('ALLOW USER SUBMIT');
             }
         });
 
