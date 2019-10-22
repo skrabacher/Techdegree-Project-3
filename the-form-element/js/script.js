@@ -311,7 +311,7 @@ error indicator and return true.
 
        let nameBoolean = false
        let emailBoolean = false
-    //    let activiesValue = 
+       let numberOfActivities = 0
        let ccNumBoolean = false
        let zipBoolean = false
        let cvvBoolean = false
@@ -380,7 +380,7 @@ error indicator and return true.
         });
 
     // ACTIVITIES INPUT VALIDATION & ERROR 
-let numberOfActivities = 0
+
     
 // $activitiesErrorMessage creates h3 tag with error message. Appends it to the fieldset
 const $activitiesErrorMessage = "<h3 class='activities'>*Please select one or more activities.</h3>"
@@ -489,18 +489,20 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             console.log('CVV: ' + cvvBoolean);
             if (nameBoolean === false) {
                 $('h3[class="name"]').show(); // shows name error message above name field
+                
             } else if (emailBoolean === false) {
-                $('h3[class="mail"]').show(); // shows name error message above name field
-            // } else if (paymentSelected === 'Credit Card') {
-            //     if (ccNumBoolean === false) {
-            //         $('h3[class="cc-num"]').show(); //show error message
-            //     } else if (zipBoolean === false) {
-            //         $('h3[class="zip"]').show(); //show error message
-            //     } else if (cvvBoolean === false) {
-            //         $('h3[class="cvv"]').show(); //show error message
-            //     } else {
-            //         console.log('ALLOW USER SUBMIT');
-            //     }
+                console.log('email boolean show error on register button click if wrong');
+                $('h3[class="email"]').show(); // shows name error message above name field
+            } else if (paymentSelected === 'Credit Card') {
+                if (ccNumBoolean === false) {
+                    $('h3[class="cc-num"]').show(); //show error message
+                } else if (zipBoolean === false) {
+                    $('h3[class="zip"]').show(); //show error message
+                } else if (cvvBoolean === false) {
+                    $('h3[class="cvv"]').show(); //show error message
+                } else {
+                    console.log('ALLOW USER SUBMIT');
+                }
 
             } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'Bitcoin') {
                 console.log('both name and email true and payment selected is bitcoin!');
