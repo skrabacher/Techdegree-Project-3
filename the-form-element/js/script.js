@@ -244,13 +244,13 @@ form accordingly.
     ● Hide the “Select Payment Method” `option` so it doesn’t show up in the drop down
 menu.*/
 
-let paymentSelected = 'select method' // global variable to hold user selected payment method
+let paymentSelected = 'Credit Card' // global variable to hold user selected payment method
 $('div[id="paypal"]').hide();// hides paypal spiel
 $('div[id="bitcoin"]').hide();//hides bitcoin spiel
 
 
 $("#payment option:first").remove();
-if ($('#payment').val() === 'select method') { //if statement hides all payment entry/info elements until a payment option is selected
+if ($('#payment').val() === 'credit card') { //if statement hides all payment entry/info elements until a payment option is selected
     $('div[id="credit-card"]').show(); //hides cc input elements
     $('div[id="paypal"]').hide();// hides paypal spiel
     $('div[id="bitcoin"]').hide();//hides bitcoin spiel
@@ -489,33 +489,37 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             console.log('CVV: ' + cvvBoolean);
             if (nameBoolean === false) {
                 $('h3[class="name"]').show(); // shows name error message above name field
-                
-            } else if (emailBoolean === false) {
-                console.log('email boolean show error on register button click if wrong');
+            } if (emailBoolean === false) {
                 $('h3[class="email"]').show(); // shows name error message above name field
-            } else if (paymentSelected === 'Credit Card') {
+            } if (numberOfActivities === 0) {
+                $('h3[class="activities"]').show(); //show error message
+            } if (paymentSelected === 'Credit Card') {
                 if (ccNumBoolean === false) {
                     $('h3[class="cc-num"]').show(); //show error message
-                } else if (zipBoolean === false) {
+                } if (zipBoolean === false) {
                     $('h3[class="zip"]').show(); //show error message
-                } else if (cvvBoolean === false) {
+                } if (cvvBoolean === false) {
                     $('h3[class="cvv"]').show(); //show error message
                 } else {
                     console.log('ALLOW USER SUBMIT');
                 }
-
-            } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'Bitcoin') {
-                console.log('both name and email true and payment selected is bitcoin!');
+            } if (paymentSelected === "Bitcoin") {
                 console.log('ALLOW USER SUBMIT');
-            } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'PayPal') {
-                console.log('both name and email true and payment selected is paypal!');
+            } if (paymentSelected === "PayPal") {
                 console.log('ALLOW USER SUBMIT');
-            } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'Credit Card' && ccNumBoolean === true && zipBoolean === true && cvvBoolean === true) {
-                console.log('name, email, cc selected as payment, and all cc input valid');
-                console.log('ALLOW USER SUBMIT');
-            } else {
-            event.preventDefault(); //stop submit button from refreshing page
             }
+            // } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'Bitcoin') {
+            //     console.log('both name and email true and payment selected is bitcoin!');
+            //     console.log('ALLOW USER SUBMIT');
+            // } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'PayPal') {
+            //     console.log('both name and email true and payment selected is paypal!');
+            //     console.log('ALLOW USER SUBMIT');
+            // } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'Credit Card' && ccNumBoolean === true && zipBoolean === true && cvvBoolean === true) {
+            //     console.log('name, email, cc selected as payment, and all cc input valid');
+            //     console.log('ALLOW USER SUBMIT');
+            // } else {
+            // event.preventDefault(); //stop submit button from refreshing page
+            
         });
 
 
