@@ -245,10 +245,13 @@ form accordingly.
 menu.*/
 
 let paymentSelected = 'select method' // global variable to hold user selected payment method
+$('div[id="paypal"]').hide();// hides paypal spiel
+$('div[id="bitcoin"]').hide();//hides bitcoin spiel
 
-$('option[value="select method"]').hide();
+
+$("#payment option:first").remove();
 if ($('#payment').val() === 'select method') { //if statement hides all payment entry/info elements until a payment option is selected
-    $('div[id="credit-card"]').hide(); //hides cc input elements
+    $('div[id="credit-card"]').show(); //hides cc input elements
     $('div[id="paypal"]').hide();// hides paypal spiel
     $('div[id="bitcoin"]').hide();//hides bitcoin spiel
 }
@@ -484,7 +487,22 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             console.log('CC#: ' + ccNumBoolean);
             console.log('Zip: ' + zipBoolean);
             console.log('CVV: ' + cvvBoolean);
-            if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'Bitcoin') {
+            if (nameBoolean === false) {
+                $('h3[class="name"]').show(); // shows name error message above name field
+            } else if (emailBoolean === false) {
+                $('h3[class="mail"]').show(); // shows name error message above name field
+            // } else if (paymentSelected === 'Credit Card') {
+            //     if (ccNumBoolean === false) {
+            //         $('h3[class="cc-num"]').show(); //show error message
+            //     } else if (zipBoolean === false) {
+            //         $('h3[class="zip"]').show(); //show error message
+            //     } else if (cvvBoolean === false) {
+            //         $('h3[class="cvv"]').show(); //show error message
+            //     } else {
+            //         console.log('ALLOW USER SUBMIT');
+            //     }
+
+            } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'Bitcoin') {
                 console.log('both name and email true and payment selected is bitcoin!');
                 console.log('ALLOW USER SUBMIT');
             } else if (nameBoolean === true && emailBoolean === true && numberOfActivities > 0 && paymentSelected === 'PayPal') {
