@@ -10,6 +10,10 @@ $(document).ready(function() { //ready method runs function as soon as page load
     $('#name').focus(); //when page loads, cursor will automatically focus on input element with name id
 });
 
+//------------------------
+//SELECT MENU REFORMATTING
+//------------------------
+
 //hides input box for other job role until user has selected "other" in the drop down menu
 $("#other-title").hide(); //hides the text input element for other job role in the html file
 
@@ -21,9 +25,6 @@ $("#title").on("change", function() {  // change event listener - everytime #tit
     }
 });
 
-//------------------------
-//SELECT MENU REFORMATTING
-//------------------------
     $("#design option:first").hide(); // hides first option in the design drop down menu "select theme"
     
     //Updates the “Color” field to read “Please select a T-shirt theme” until the user has selected a theme. 
@@ -38,11 +39,7 @@ $("#title").on("change", function() {  // change event listener - everytime #tit
 //if "js puns" it will hide the three “heart js” option elements in the “Color” dropdown menu and only show "js puns" shirt colors
 //if "heart js" it will hide the three “js puns” option elements in the “Color” dropdown menu and only show "heart js" shirt colors
 $("#design").on('change', function(event){ //change event handler uses selected theme to display only the corresponding color t shirts in the color drop down menu and hides the shirt colors that do not match the user theme selection
-    console.log("in change event handler for t shirt design");
-    console.log(event);
-    console.log(event.target);
     if($('#design').val() === "js puns") { //if statement for when js puns is selected > only shows the t shirts with the js puns options
-        console.log("js puns selected");
         $('div[id="colors-js-puns"]').show(); //Shows the "Color" label and select menu **EXCEEDS***
         $("#color option").show(); // shows all of the options for the color select menu
         $("#color option").eq(0).hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
@@ -51,7 +48,6 @@ $("#design").on('change', function(event){ //change event handler uses selected 
         $("#color [value='steelblue']").hide(); // hides t shirt with the value listed inside brackets
         $("#color [value='dimgrey']").hide(); // hides t shirt with the value listed inside brackets
     } else if ($('#design').val() === "heart js") { //if statement for when heart js is selected > only shows the t shirts with the heart js options
-        console.log("heart js selected"); 
         $('div[id="colors-js-puns"]').show(); //Shows the "Color" label and select menu **EXCEEDS***
         $("#color option").show(); // shows all of the options for the color select menu
         $("#color option:first").hide();// then hides the first option in the color drop down menu so that it only shows as the title of the drop down menu
@@ -77,7 +73,6 @@ let activityCost= 0; // global variable for total activity cost
 
 //Checkbox Handler - listens for when boxes are checked or unchecked. 
 $("[type=checkbox]").on('change', function(event){ //change event handler for check boxes in activity section
-    console.log("in activities change event handler");
     let $clickedBox= (event.target); //variable for dom input element(checkbox) that was just clicked
     
     //Activity Cost Calulator - will add up the cost of all checked activities and return as a number that can be displayed in the amount due field 
@@ -103,7 +98,6 @@ $("[type=checkbox]").on('change', function(event){ //change event handler for ch
         */
     //Conflicting Activities Disabler - when activity is checked, disables any other check boxes for activities at same time. when unchecked, enables previously conflicting check boxes
     let $clickedDataDayAndTime = $($clickedBox).attr('data-day-and-time');//day and time attribute of clicked box
-    console.log($clickedDataDayAndTime);
          
        // loops through all check boxes   
        for (i = 0; i < 7; i++) { //for loop to create indexes numbers to cycle through all checked boxes
@@ -141,7 +135,6 @@ if ($('#payment').val() === 'credit card') {
 
 //Payment Drop Down Menu Handler
 $("#payment").on('change', function(event){ 
-    console.log($('#payment').val());
     paymentSelected = $('#payment').val() // gets the value of the payment menu option selected 
     //if user selected credit card, shows credit card payment input fields,
        if (paymentSelected === 'Credit Card') {
@@ -203,7 +196,6 @@ error indicator and return true.
 
     //NAME INPUT VALIDATION & ERROR MESSAGE - tests input and returns error if invalid
         function isValidName(name) { // tests to see if name field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
-            console.log ('in isValidName function');
             return /^[a-z]+\.?([a-z]+)?\.?\s[a-z]+$/i.test(name); //regex designed to allow names with initials such as J.J. and requires a first and last name
             // return /.+/.test(name); // if field is blank test method wallow names with initials such as J.J. and requires a first and last name
         }
@@ -214,14 +206,10 @@ error indicator and return true.
         $('h3[class="name"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
             
         $(nameInput).keyup(function(event){ //event listener for any typing in name input field
-            console.log ($(this).val()); //console logs the text the user typed
             nameBoolean= isValidName($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-            console.log(nameBoolean);
             if (nameBoolean === true) {
-                console.log ('Name is valid!')
                 $('h3[class="name"]').hide();//hide error message
             } else if (nameBoolean === false) {
-                console.log ('Name is invalid!')
                 $('h3[class="name"]').show(); //show error message
             }
         });
@@ -229,7 +217,6 @@ error indicator and return true.
 
     //EMAIL INPUT VALIDATION & ERROR MESSAGE
         function isValidEmail(mail) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
-            console.log('in isValidEmail function');
             return /^[^@]+@[^@.]+\.[a-z]+$/i.test(mail);
         }
 
@@ -244,20 +231,14 @@ error indicator and return true.
         $('h3[class="email-blank"]').hide(); 
 
         $(emailInput).keyup(function(event){ //event listener for any typing in email input field
-            console.log ($(this).val()); //console logs the text the user typed
             emailBoolean= isValidEmail($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-            console.log(emailBoolean);
-            //emailBlankBoolean= 
             if (/^\s*$/.test($(this).val()) === true) {
-                console.log("nothing entered into email field")
                 $('h3[class="email-blank"]').show();//hide error message
                 $('h3[class="email"]').hide();//hide error message
             } else if (emailBoolean === true) {
-                console.log ('Email is valid!')
                 $('h3[class="email-blank"]').hide(); 
                 $('h3[class="email"]').hide();//hide error message
             } else if (emailBoolean === false) {
-                console.log ('Email is invalid!')
                 $('h3[class="email"]').show(); //show error message
                 $('h3[class="email-blank"]').hide();                 
             }
@@ -275,10 +256,8 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
         $('input[type="checkbox"]').on('change', function(event){ //change event handler runs everytime an activity box is checked or unchecked
             numberOfActivities = $('input[type="checkbox"]:checked').length
             if (numberOfActivities === 0) { //counts number of boxes that are checked and tests to see if they equal zero
-                console.log('show error message');  
                 $('h3[class="activities"]').show(); //show error message
             } else if (numberOfActivities > 0) {
-                console.log('submit ok');//show error message
                 $('h3[class="activities"]').hide(); //hide error message
             }
         });
@@ -287,7 +266,6 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
     // PAYMENT INPUT VALIDATION & ERROR MESSAGE
        //CARDNUMBER
        function isValidCCNumber(creditCardNumber) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
-        console.log('in is ValidCCNumber function');
         return /^[0-9]{4}\s?\-?,?[0-9]{4}\s?\-?,?[0-9]{4}\s?\-?,?[0-9]{1,4}/.test(creditCardNumber); //regex requires 13-16 digits which can be optionally separated by commas, hyphens, or spaces after every 4th digit.
         }
 
@@ -298,21 +276,16 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
         $('h3[class="cc-num"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
         
         $(creditCardNumberInput).keyup(function(event){ //event listener for any typing in cc-num input field
-            console.log ($(this).val()); //console logs the text the user typed
             ccNumBoolean = isValidCCNumber($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-            console.log(ccNumBoolean);
             if (ccNumBoolean === true) {
-                console.log ('CC Number is valid!')
                 $('h3[class="cc-num"]').hide();//hide error message
             } else if (ccNumBoolean === false) {
-                console.log ('CC Number is invalid!')
                 $('h3[class="cc-num"]').show(); //show error message
             }
         }); 
 
         //ZIPCODE
         function isValidZip(zipCode) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
-            console.log('in isValidZip function');
             return /^[0-9]{5}$/.test(zipCode); //regex requires 5 digits
             }
     
@@ -323,21 +296,16 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             $('h3[class="zip"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
             
             $(zipCodeInput).keyup(function(event){ //event listener for any typing in cc-num input field
-                console.log ($(this).val()); //console logs the text the user typed
                 zipBoolean = isValidZip($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-                console.log(zipBoolean);
                 if (zipBoolean === true) {
-                    console.log ('Zip is valid!')
                     $('h3[class="zip"]').hide();//hide error message
                 } else if (zipBoolean === false) {
-                    console.log ('Zip is invalid!')
                     $('h3[class="zip"]').show(); //show error message
                 }
             }); 
 
         //CVV    
         function isValidCVV(cvv) { // tests to see if email field input is correctly formatted. Returns true if formatted correctly, false if not formatted correctly.
-            console.log('in isValidCVV function');
             return /^[0-9]{3}$/.test(cvv); //regex requires 5 digits
             }
     
@@ -348,28 +316,16 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
             $('h3[class="cvv"]').hide(); // hides the error message so that it is not shown unless triggered by keyup event listener below
             
             $(cvvInput).keyup(function(event){ //event listener for any typing in cc-num input field
-                console.log ($(this).val()); //console logs the text the user typed
                 cvvBoolean= isValidCVV($(this).val()); //tests the user inputted text against the regex using the validating function and returns the boolean value. true=valid false=invalid)
-                console.log(cvvBoolean);
                 if (cvvBoolean === true) {
-                    console.log ('CVV is valid!')
                     $('h3[class="cvv"]').hide();//hide error message
                 } else if (cvvBoolean === false) {
-                    console.log ('CVV is invalid!')
                     $('h3[class="cvv"]').show(); //show error message
                 }
             }); 
        
     //MASTER VALIDATION FUNCTION - tests to ensure ALL validations above return true (or for activities > 0) then allows user to submit for, OR displays error messages for fields that are invalid
         $("[type=submit]").on('click', function(event){ //click event handler for submit button
-            console.log("in Master Validation Function");
-            console.log('Name: ' + nameBoolean);
-            console.log('Email: ' + emailBoolean);
-            console.log('Payment Method: ' + paymentSelected);
-            console.log('Activities#: ' + numberOfActivities);
-            console.log('CC#: ' + ccNumBoolean);
-            console.log('Zip: ' + zipBoolean);
-            console.log('CVV: ' + cvvBoolean);
             if (nameBoolean === false) {
                 $('h3[class="name"]').show(); // shows name error message above name field
                 event.preventDefault(); //stop submit button from refreshing page
@@ -390,12 +346,12 @@ $('h3[class="activities"]').hide(); // hides the error message so that it is not
                     $('h3[class="cvv"]').show(); //show error message
                     event.preventDefault(); //stop submit button from refreshing page
                 } else {
-                    //console.log('ALLOW USER SUBMIT');
+                //ALLOWS USER SUBMIT
                 }
             } if (paymentSelected === "Bitcoin") {
-                //console.log('ALLOW USER SUBMIT');
+                //ALLOWS USER SUBMIT
             } if (paymentSelected === "PayPal") {
-                //console.log('ALLOW USER SUBMIT');
+                //ALLOWS USER SUBMIT
             }
         });
 
