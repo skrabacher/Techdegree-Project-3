@@ -1,8 +1,8 @@
-// ----------------------------------
+// ---------------------------------
 // Sarah Krabacher
 // FSJS TechDegree - Team Treehouse
 // Project 3 - Exceeds Expectations
-// ----------------------------------
+// ---------------------------------
 
 
 //focuses cursor on name input element when page is loaded
@@ -14,7 +14,7 @@ $(document).ready(function() { //ready method runs function as soon as page load
 //SELECT MENU REFORMATTING
 //------------------------
 
-//hides input box for other job role until user has selected "other" in the drop down menu
+//hides input box for other job role until user has selected "other" in the drop down menu 
 $("#other-title").hide(); //hides the text input element for other job role in the html file
 
 $("#title").on("change", function() {  // change event listener - everytime #title value is changed
